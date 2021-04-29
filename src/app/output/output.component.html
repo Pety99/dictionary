@@ -1,0 +1,22 @@
+<div
+  class="large-box-output mat-elevation-z4"
+  [ngStyle]="{ minHeight: multiLine ? '254.5px' : '116.5px' }"
+>
+  <div *ngIf="chipOutput; then thenBlock; else elseBlock"></div>
+  <ng-template #thenBlock>
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip color="accent" selected disableRipple>Word 1</mat-chip>
+      <mat-chip color="accent" selected disableRipple>Synonym 2</mat-chip>
+      <mat-chip color="accent" selected disableRipple>Another Synonym</mat-chip>
+      <mat-chip color="accent" selected disableRipple
+        >Yet Another Match</mat-chip
+      >
+    </mat-chip-list>
+  </ng-template>
+  <ng-template #elseBlock>
+    <p>
+      asdasd asd ad asd asdasd asddasd dasdsad a asdsd d sd ds dafdfds gsdf
+      gdfhj jahdf sdbv rui gfbddn,fh
+    </p>
+  </ng-template>
+</div>

@@ -1,0 +1,15 @@
+<language-selector></language-selector>
+
+<div flex fxLayout="row" fxLayoutAlign="center" class="text-fields">
+  <inputTextArea
+    [lines]="inputLines"
+    [submitText]="submitText"
+    fxFlex.lt-sm="100%"
+    fxFlex.gt-xs="50%"
+  ></inputTextArea>
+  <outputTextArea
+    [multiLine]="inputLines > 1"
+    fxFlex.lt-sm="100%"
+    fxFlex.gt-xs="50%"
+  ></outputTextArea>
+</div>

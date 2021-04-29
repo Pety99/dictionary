@@ -1,0 +1,23 @@
+.large-box-output {
+  font-size: 17px;
+  width: calc(100% - 128px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 32px;
+  padding: 32px;
+  border-radius: 8px;
+}
+
+textarea {
+  width: 100%;
+  height: 95%;
+}
+textarea {
+  vertical-align: top;
+}
+
+mat-form-field {
+  width: 100%;
+}

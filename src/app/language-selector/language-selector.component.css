@@ -1,0 +1,14 @@
+mat-form-field {
+  width: 100%;
+}
+
+.selects-container {
+  flex-wrap: wrap;
+}
+
+.swap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -16px;
+}

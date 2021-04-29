@@ -1,0 +1,38 @@
+<div flex fxLayout="row" fxLayoutAlign="center" class="selects-container">
+  <div
+    fxFlex.lt-sm="100%"
+    fxFlex.gt-xs="33%"
+    fxLayout="row"
+    fxLayoutAlign="center"
+  >
+    <selectLanguage
+      [languages]="languages"
+      (selectedEvent)="handleSourceLanguageSelected($event)"
+      [selected]="selectedSourceLanguage"
+    ></selectLanguage>
+  </div>
+
+  <div fxFlex.lt-sm="100%" class="swap">
+    <button
+      mat-icon-button
+      color="primary"
+      aria-label="Example icon button with a home icon"
+      (click)="handleSwapLanguages()"
+    >
+      <mat-icon>swap_horiz</mat-icon>
+    </button>
+  </div>
+
+  <div
+    fxFlex.lt-sm="100%"
+    fxFlex.gt-xs="33%"
+    fxLayout="row"
+    fxLayoutAlign="center"
+  >
+    <selectLanguage
+      [languages]="matchingLanguages"
+      (selectedEvent)="handleTargetLanguageSelected($event)"
+      [selected]="selectedTargetLanguage"
+    ></selectLanguage>
+  </div>
+</div>

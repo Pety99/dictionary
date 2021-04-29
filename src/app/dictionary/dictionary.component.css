@@ -1,0 +1,13 @@
+.text-fields {
+  flex-wrap: wrap;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+}
+
+.submit {
+  width: 200px;
+  height: 50px;
+}

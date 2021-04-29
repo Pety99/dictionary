@@ -1,0 +1,30 @@
+<div class="large-box mat-elevation-z4">
+  <mat-form-field>
+    <mat-label>Input</mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      [cdkAutosizeMinRows]="lines"
+      [cdkAutosizeMaxRows]="lines"
+      [(ngModel)]="textContent"
+    ></textarea>
+  </mat-form-field>
+  <div class="submit-container">
+    <button
+      mat-icon-button
+      aria-label="Example icon button with a vertical three dot icon"
+      (click)="handleClearClick()"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="submit"
+      (click)="handleSubmitClick()"
+    >
+      {{ submitText }}
+    </button>
+  </div>
+</div>

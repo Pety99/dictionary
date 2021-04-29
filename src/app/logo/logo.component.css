@@ -1,0 +1,19 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  width: 96px;
+  height: 96px;
+  margin: 16px;
+}
+
+.title {
+  font-size: 64px;
+  font-weight: 700;
+  font-family: Brandon Text, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  color: #673ab7;
+  margin-left: -16px;
+  margin-top: 24px;
+}

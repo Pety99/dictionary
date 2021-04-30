@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Language } from '../models/language.model';
+import { Languages } from '../models/languages.model';
 
-interface Languages {
+interface OGLanguages {
   [key: string]: string;
 }
 
@@ -8,7 +10,7 @@ interface Languages {
   providedIn: 'root',
 })
 export class DictionaryService {
-  private languages: Languages = {
+  private languages: OGLanguages = {
     af: 'Afrikaans',
     am: 'Amharic',
     ar: 'Arabic',
@@ -270,7 +272,36 @@ export class DictionaryService {
     'uk-tr',
   ];
 
-  constructor() {}
+  languagesMap = new Map<keyof Languages, Language>();
+
+  constructor() {
+    // put all the language key : Language pairs into a map
+    for (const [key, value] of Object.entries(this.languages)) {
+      const obj: Language = {
+        key: key,
+        name: value,
+        matchingLanguages: [],
+      };
+
+      this.languagesMap.set(key, obj);
+    }
+
+    // Add the mathcing language keys to the languages
+    for (const dir of this.directions) {
+      const key: keyof Languages = dir.substring(0, 2);
+      const matchKey: keyof Languages = dir.substring(3, dir.length);
+
+      if (this.languagesMap.has(key)) {
+        const prevValue: Language = this.languagesMap.get(key)!;
+        const newValue: Language = {
+          key: prevValue.key,
+          name: prevValue.name,
+          matchingLanguages: [...prevValue.matchingLanguages, matchKey],
+        };
+        this.languagesMap.set(key, newValue)!;
+      }
+    }
+  }
 
   /**
    * This function gets the available languages from the API or from the local state (if cached),
@@ -278,7 +309,14 @@ export class DictionaryService {
    * @returns all the available languages.
    */
   getLanguages() {
-    return this.languages;
+    const result: Languages = {};
+    for (const [key, value] of this.languagesMap.entries()) {
+      if (value.matchingLanguages.length > 0) {
+        result[key] = value;
+      }
+    }
+    return result;
+    //return this.languages;
   }
 
   /**
@@ -288,23 +326,19 @@ export class DictionaryService {
    * @param languageKey
    * @returns the languages that the input language could be translated to
    */
+  /////////not the comment fot this function
+
   getMatchingLanguages(languageKey: keyof Languages) {
-    return (
-      this.directions
-        // Filters the keys of the languages that the provided languageKey can be translated to
-        .filter((pair) => pair.match(`${languageKey}-`))
-        // cuts off the provided languageKey and the '-' to obtain the key
-        .map((pair) => pair.substring(3, pair.length))
-        // Maps the new keys to an array of {key : language} objects
-        .map((key: keyof Languages) => ({
-          [key]: this.languages[key],
-        }))
-        // Reduce the newly mapped array to an object with key : language pairs
-        .reduce((result: Languages, obj: Object) => {
-          const [content] = Object.entries(obj);
-          result[content[0]] = content[1];
-          return result;
-        }, {})
-    );
+    const result: Languages = {};
+    const language: Language = this.languagesMap.get(languageKey)!;
+    const matches = language.matchingLanguages.map((l) => {
+      return this.languagesMap.get(l)!;
+    });
+
+    for (const match of matches) {
+      result[match.key] = match;
+    }
+
+    return result;
   }
 }

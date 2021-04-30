@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
   EventEmitter,
 } from '@angular/core';
+import { Language } from '../models/language.model';
 
 @Component({
   selector: 'selectLanguage',
@@ -25,6 +26,14 @@ export class SelectComponent implements OnInit {
    */
   notifyParent() {
     this.selectedEvent.emit(this.selected);
+  }
+
+  getName(language: Language) {
+    return language.name;
+  }
+
+  getMatchingLanguages(language: Language) {
+    return language.matchingLanguages;
   }
 
   ngOnInit(): void {}

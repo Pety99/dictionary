@@ -6,7 +6,7 @@
         *ngFor="let object of languages | keyvalue"
         value="{{ object.key }}"
       >
-        {{ object.value }}
+        {{ getName(object.value) }}
       </mat-option>
     </mat-select>
   </mat-form-field>

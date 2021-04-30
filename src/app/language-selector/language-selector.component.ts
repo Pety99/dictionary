@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DictionaryService } from '../dictionary.service';
+import { DictionaryService } from '../services/dictionary.service';
 import config from '../../env';
+import { Languages } from '../models/languages.model';
 
 @Component({
   selector: 'language-selector',
@@ -8,10 +9,10 @@ import config from '../../env';
   styleUrls: ['./language-selector.component.css'],
 })
 export class LanguageSelectorComponent implements OnInit {
-  public languages = {}; // All the available languages
+  public languages: Languages = {}; // All the available languages
   public selectedSourceLanguage = ''; // the key of the selected starting language;
   public selectedTargetLanguage = ''; // the key of the selected target language;
-  public matchingLanguages = {}; // The languages you can translate to from the selected language
+  public matchingLanguages: Languages = {}; // The languages you can translate to from the selected language
 
   constructor(private _dictionaryService: DictionaryService) {}
 
@@ -29,7 +30,7 @@ export class LanguageSelectorComponent implements OnInit {
     this.selectedSourceLanguage = language;
     this.matchingLanguages = this._dictionaryService.getMatchingLanguages(
       language
-    );
+    )!;
 
     // Must reset the target to an empty string if it is not in the new matching languages
     if (

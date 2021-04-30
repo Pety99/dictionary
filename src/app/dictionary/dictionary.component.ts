@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import config from '../../env';
-import { DictionaryService } from '../dictionary.service';
+import { DictionaryService } from '../services/dictionary.service';
 @Component({
   selector: 'dictionary',
   templateUrl: './dictionary.component.html',

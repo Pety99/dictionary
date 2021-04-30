@@ -12,7 +12,7 @@ import { SelectComponent } from './select/select.component';
 import { LogoComponent } from './logo/logo.component';
 import { InputComponent } from './input/input.component';
 import { OutputComponent } from './output/output.component';
-import { DictionaryService } from './dictionary.service';
+import { DictionaryService } from './services/dictionary.service';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { FormsModule } from '@angular/forms';
 

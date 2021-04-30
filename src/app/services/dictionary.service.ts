@@ -275,10 +275,9 @@ export class DictionaryService {
   languagesMap = new Map<keyof Languages, Language>();
 
   constructor() {
-    // put all the language key : Language pairs into a map
+    // put all the language key : Language pairs into a map for faster anf easier processing
     for (const [key, value] of Object.entries(this.languages)) {
       const obj: Language = {
-        key: key,
         name: value,
         matchingLanguages: [],
       };
@@ -294,7 +293,6 @@ export class DictionaryService {
       if (this.languagesMap.has(key)) {
         const prevValue: Language = this.languagesMap.get(key)!;
         const newValue: Language = {
-          key: prevValue.key,
           name: prevValue.name,
           matchingLanguages: [...prevValue.matchingLanguages, matchKey],
         };
@@ -304,8 +302,8 @@ export class DictionaryService {
   }
 
   /**
-   * This function gets the available languages from the API or from the local state (if cached),
-   *  and returns them as an object of key : language pairs.
+   * This function gets the available languages from the  local state,
+   *  and returns them.
    * @returns all the available languages.
    */
   getLanguages() {
@@ -323,7 +321,7 @@ export class DictionaryService {
    * Returns the the languages which the language matching the provided language key can be translated to.
    * If there are no matches (because the key was wrong, or there are no languages for the provided key)
    * the result will be an empty object.
-   * @param languageKey
+   * @param languageKey the key of the language you want to trasnalte
    * @returns the languages that the input language could be translated to
    */
   /////////not the comment fot this function
@@ -331,14 +329,9 @@ export class DictionaryService {
   getMatchingLanguages(languageKey: keyof Languages) {
     const result: Languages = {};
     const language: Language = this.languagesMap.get(languageKey)!;
-    const matches = language.matchingLanguages.map((l) => {
-      return this.languagesMap.get(l)!;
-    });
-
-    for (const match of matches) {
-      result[match.key] = match;
+    for (const matchKey of language.matchingLanguages) {
+      result[matchKey] = this.languagesMap.get(matchKey)!;
     }
-
     return result;
   }
 }

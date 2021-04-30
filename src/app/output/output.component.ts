@@ -6,8 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./output.component.css'],
 })
 export class OutputComponent implements OnInit {
-  @Input() multiLine = false;
-  @Input() chipOutput = false;
+  @Input() multiLine: boolean = false;
+  @Input() chipOutput: boolean = false;
+  @Input() input: string[] = [];
   constructor() {}
 
   ngOnInit(): void {}

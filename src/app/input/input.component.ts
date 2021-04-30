@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'inputTextArea',
@@ -8,15 +8,18 @@ import { Component, Input, OnInit } from '@angular/core';
 export class InputComponent implements OnInit {
   @Input() lines = 1;
   @Input() submitText = 'Submit';
-  @Input() textContent = '';
+  textContent = '';
+  @Output() submitEvent: EventEmitter<string> = new EventEmitter();
+
   constructor() {}
+
   ngOnInit(): void {}
 
   /**
    * Handles the submit button click
    */
   handleSubmitClick() {
-    console.log(this.textContent);
+    this.submitEvent.emit(this.textContent);
   }
 
   /**
@@ -24,5 +27,7 @@ export class InputComponent implements OnInit {
    */
   handleClearClick() {
     this.textContent = '';
+    // Clear the translate output too
+    this.submitEvent.emit(this.textContent);
   }
 }

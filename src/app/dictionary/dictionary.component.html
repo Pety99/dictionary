@@ -1,14 +1,19 @@
-<language-selector></language-selector>
+<language-selector
+  (sourceSelectedEvent)="handleSourceLanguageSelected($event)"
+  (targetSelectedEvent)="handleTargetLanguageSelected($event)"
+></language-selector>
 
 <div flex fxLayout="row" fxLayoutAlign="center" class="text-fields">
   <inputTextArea
     [lines]="inputLines"
     [submitText]="submitText"
+    (submitEvent)="trasnlateLanguages($event)"
     fxFlex.lt-sm="100%"
     fxFlex.gt-xs="50%"
   ></inputTextArea>
   <outputTextArea
     [multiLine]="inputLines > 1"
+    [input]="[outputText]"
     fxFlex.lt-sm="100%"
     fxFlex.gt-xs="50%"
   ></outputTextArea>

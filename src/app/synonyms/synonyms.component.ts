@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./synonyms.component.css'],
 })
 export class SynonymsComponent implements OnInit {
-  inputLines = 1;
-  submitText = 'Get Synonym';
-  chipOutput = true;
+  inputLines: number = 1;
+  submitText: string = 'Get Synonym';
+  chipOutput: boolean = true;
+  synonyms: string[] = [];
 
   constructor() {}
   ngOnInit(): void {}
+
+  getSynonyms(textContent: string) {
+    //Clear the output if the input is empty
+    if (textContent === '') {
+      this.synonyms = [];
+    } else {
+      // TODO Get Synonyms
+      this.synonyms = [textContent, 'synonym1', 'synonym2'];
+    }
+  }
 }

@@ -1,12 +1,14 @@
 <div flex fxLayout="row" fxLayoutAlign="center" class="text-fields">
   <inputTextArea
     [submitText]="submitText"
+    (submitEvent)="getSynonyms($event)"
     fxFlex.lt-sm="100%"
     fxFlex.gt-xs="50%"
   ></inputTextArea>
   <outputTextArea
     [multiLine]="inputLines > 1"
     [chipOutput]="chipOutput"
+    [input]="synonyms"
     fxFlex.lt-sm="100%"
     fxFlex.gt-xs="50%"
   ></outputTextArea>

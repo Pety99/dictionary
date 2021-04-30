@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DictionaryService } from '../services/dictionary.service';
 import config from '../../env';
 import { Languages } from '../models/languages.model';
@@ -9,10 +9,16 @@ import { Languages } from '../models/languages.model';
   styleUrls: ['./language-selector.component.css'],
 })
 export class LanguageSelectorComponent implements OnInit {
-  public languages: Languages = {}; // All the available languages
-  public selectedSourceLanguage = ''; // the key of the selected starting language;
-  public selectedTargetLanguage = ''; // the key of the selected target language;
-  public matchingLanguages: Languages = {}; // The languages you can translate to from the selected language
+  languages: Languages = {}; // All the available languages.
+  matchingLanguages: Languages = {}; // The languages you can translate to from the selected language.
+  selectedSourceLanguage = ''; // the key of the selected starting language;
+  selectedTargetLanguage = ''; // the key of the selected target language;
+
+  @Output()
+  sourceSelectedEvent: EventEmitter<keyof Languages> = new EventEmitter();
+
+  @Output()
+  targetSelectedEvent: EventEmitter<keyof Languages> = new EventEmitter();
 
   constructor(private _dictionaryService: DictionaryService) {}
 
@@ -24,7 +30,7 @@ export class LanguageSelectorComponent implements OnInit {
   /**
    * This handles the event when the main language is selected.
    * Sets the matching languages for the secondary language.
-   * @param language key of the selected language
+   * @param language key of the selected language.
    */
   handleSourceLanguageSelected(language: string) {
     this.selectedSourceLanguage = language;
@@ -32,16 +38,26 @@ export class LanguageSelectorComponent implements OnInit {
       language
     )!;
 
-    // Must reset the target to an empty string if it is not in the new matching languages
+    // Must reset the target to an empty string if it is not in the new matching languages.
     if (
       !Object.keys(this.matchingLanguages).includes(this.selectedTargetLanguage)
     ) {
       this.selectedTargetLanguage = '';
     }
+
+    // Notify parent
+    this.sourceSelectedEvent.emit(this.selectedSourceLanguage);
   }
 
+  /**
+   * Sets the thafet language as the provided language.
+   * @param language the selected target language.
+   */
   handleTargetLanguageSelected(language: string) {
     this.selectedTargetLanguage = language;
+
+    // Notify parent
+    this.targetSelectedEvent.emit(this.selectedTargetLanguage);
   }
 
   /**
@@ -60,6 +76,10 @@ export class LanguageSelectorComponent implements OnInit {
       this.matchingLanguages = this._dictionaryService.getMatchingLanguages(
         this.selectedSourceLanguage
       );
+
+      // Notify parent
+      this.sourceSelectedEvent.emit(this.selectedSourceLanguage);
+      this.targetSelectedEvent.emit(this.selectedTargetLanguage);
     }
   }
 }

@@ -28,10 +28,20 @@ export class SelectComponent implements OnInit {
     this.selectedEvent.emit(this.selected);
   }
 
+  /**
+   *
+   * @param language input language.
+   * @returns returns the name of the input language.
+   */
   getName(language: Language) {
     return language.name;
   }
 
+  /**
+   *
+   * @param language input language.
+   * @returns the matching languages of the input language.
+   */
   getMatchingLanguages(language: Language) {
     return language.matchingLanguages;
   }

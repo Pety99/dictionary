@@ -15,6 +15,7 @@ import { OutputComponent } from './output/output.component';
 import { DictionaryService } from './services/dictionary.service';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [DictionaryService],
   bootstrap: [AppComponent],

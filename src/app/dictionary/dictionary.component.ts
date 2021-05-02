@@ -27,9 +27,20 @@ export class DictionaryComponent implements OnInit {
    * @param textContent the text content of the input field.
    */
   trasnlateLanguages(textContent: string) {
-    if (this.sourceLanguageKey && this.targetLanguageKey) {
-      // TODO Trasnlate The text
-      this.outputText = textContent + ' Translated';
+    if (this.sourceLanguageKey && this.targetLanguageKey && textContent) {
+      this._dictionaryService
+        .translateText(
+          this.sourceLanguageKey,
+          this.targetLanguageKey,
+          textContent
+        )
+        .then((res) => {
+          this.outputText = res;
+        });
+    }
+    // If some parameter for the translate function is wrong the output should be empty.
+    else {
+      this.outputText = '';
     }
   }
 

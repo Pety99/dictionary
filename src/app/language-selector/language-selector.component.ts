@@ -23,7 +23,6 @@ export class LanguageSelectorComponent implements OnInit {
   constructor(private _dictionaryService: DictionaryService) {}
 
   ngOnInit(): void {
-    console.log(config.YANDEX_API_KEY);
     this._dictionaryService.getLanguages().then((res) => {
       this.languages = res;
       console.log(res);

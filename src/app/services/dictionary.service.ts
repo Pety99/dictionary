@@ -4,6 +4,7 @@ import { Languages } from '../models/languages.model';
 import { LanguagesRespone } from '../models/LanguagesRespone.model';
 import { HttpClient } from '@angular/common/http';
 import config from '../../env';
+import { TranslateResponse } from '../models/translateResponse.model';
 
 @Injectable({
   providedIn: 'root',
@@ -101,5 +102,36 @@ export class DictionaryService {
       result[matchKey] = this.languagesMap.get(matchKey)!;
     }
     return result;
+  }
+
+  /**
+   * Sends an API request to translate the provided text from the selected source language to the target language.
+   * If the source language is not delected right, the API will still try to detect the source language and translate the text.
+   *
+   * @param sourceLanguage
+   * @param targetLanguage
+   * @param text
+   * @returns
+   */
+  async translateText(
+    sourceLanguage: keyof Languages,
+    targetLanguage: keyof Languages,
+    text: string
+  ) {
+    const lang: string = sourceLanguage + '-' + targetLanguage;
+    const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${config.YANDEX_API_KEY}&text=${text}&lang=${lang}&format=plain`;
+
+    const response = await this.http
+      .get<TranslateResponse>(url)
+      .toPromise()
+      // Return empty object and array in case of error
+      .catch((err) => ({
+        text: [
+          'An error occured during the translation process. Please try again later.',
+        ],
+      }));
+
+    // Return the translated text
+    return response.text[0];
   }
 }

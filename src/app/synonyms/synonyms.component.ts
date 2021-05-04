@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SynonymService } from '../services/synonym.service';
 
 @Component({
   selector: 'synonyms',
@@ -9,9 +10,9 @@ export class SynonymsComponent implements OnInit {
   inputLines: number = 1;
   submitText: string = 'Get Synonym';
   chipOutput: boolean = true;
-  synonyms: string[] = [];
+  synonyms?: string[] = [];
 
-  constructor() {}
+  constructor(private synonymService: SynonymService) {}
   ngOnInit(): void {}
 
   getSynonyms(textContent: string) {
@@ -19,8 +20,9 @@ export class SynonymsComponent implements OnInit {
     if (textContent === '') {
       this.synonyms = [];
     } else {
-      // TODO Get Synonyms
-      this.synonyms = [textContent, 'synonym1', 'synonym2'];
+      this.synonymService.getSynonyms(textContent).then((res) => {
+        this.synonyms = res;
+      });
     }
   }
 }

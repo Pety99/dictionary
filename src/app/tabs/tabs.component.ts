@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-//import { DictionaryComponent } from '../dictionary/dictionary.component';
-//import { SynonymsComponent } from '../synonyms/synonyms.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tabs',
@@ -9,7 +8,29 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class TabsComponent implements OnInit {
-  constructor() {}
+  navLinks: any[];
+  activeLinkIndex = -1;
 
-  ngOnInit(): void {}
+  constructor(private router: Router) {
+    this.navLinks = [
+      {
+        label: 'Translate',
+        link: './translate',
+        index: 0,
+      },
+      {
+        label: 'Synonyms',
+        link: './synonyms',
+        index: 1,
+      },
+    ];
+  }
+
+  ngOnInit(): void {
+    this.router.events.subscribe((res) => {
+      this.activeLinkIndex = this.navLinks.indexOf(
+        this.navLinks.find((tab) => tab.link === '.' + this.router.url)
+      );
+    });
+  }
 }

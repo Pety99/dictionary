@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import config from '../../env';
 import { Languages } from '../models/languages.model';
 import { DictionaryService } from '../services/dictionary.service';
 @Component({
@@ -15,11 +14,9 @@ export class DictionaryComponent implements OnInit {
   private sourceLanguageKey?: keyof Languages;
   private targetLanguageKey?: keyof Languages;
 
-  constructor(private _dictionaryService: DictionaryService) {}
+  constructor(private dictionaryService: DictionaryService) {}
 
-  ngOnInit(): void {
-    console.log(config.YANDEX_API_KEY);
-  }
+  ngOnInit(): void {}
 
   /**
    * Translates the languages.
@@ -28,7 +25,7 @@ export class DictionaryComponent implements OnInit {
    */
   trasnlateLanguages(textContent: string) {
     if (this.sourceLanguageKey && this.targetLanguageKey && textContent) {
-      this._dictionaryService
+      this.dictionaryService
         .translateText(
           this.sourceLanguageKey,
           this.targetLanguageKey,

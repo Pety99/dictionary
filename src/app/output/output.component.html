@@ -1,22 +1,36 @@
 <div
   class="large-box-output mat-elevation-z4"
-  [ngStyle]="{ minHeight: multiLine ? '254.5px' : '116.5px' }"
+  [ngStyle]="{ minHeight: multiLine ? '244.5px' : '109px' }"
 >
   <div *ngIf="chipOutput; then thenBlock; else elseBlock"></div>
+  <!--Chip output is turned on. Synonyms will be displayed-->
   <ng-template #thenBlock>
-    <mat-chip-list aria-label="Fish selection">
-      <mat-chip
-        color="accent"
-        selected
-        disableRipple
-        *ngFor="let word of input"
-        >{{ word }}</mat-chip
-      >
-    </mat-chip-list>
+    <div *ngIf="input; then thenBlock2; else elseBlock2"></div>
+    <!--The input is not null, so synonyms should be displayed-->
+    <ng-template #thenBlock2>
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip
+          color="accent"
+          selected
+          disableRipple
+          *ngFor="let word of input"
+          >{{ word }}</mat-chip
+        >
+      </mat-chip-list>
+    </ng-template>
+    <!--the input is null, an error should appear-->
+    <ng-template #elseBlock2>
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip color="error" selected disableRipple
+          >No Synonyms Found</mat-chip
+        >
+      </mat-chip-list>
+    </ng-template>
   </ng-template>
+  <!--Chip output is turned off. Translated text will be displayed-->
   <ng-template #elseBlock>
     <p>
-      {{ input[0] }}
+      {{ input![0] }}
     </p>
   </ng-template>
 </div>

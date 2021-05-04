@@ -1,6 +1,6 @@
 <div class="select-container">
   <mat-form-field appearance="fill">
-    <mat-label>Input Language</mat-label>
+    <mat-label>{{ placeholderText }}</mat-label>
     <mat-select [(value)]="selected" (selectionChange)="notifyParent()">
       <mat-option
         *ngFor="let object of languages | keyvalue"

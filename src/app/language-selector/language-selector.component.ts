@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DictionaryService } from '../services/dictionary.service';
-import config from '../../env';
 import { Languages } from '../models/languages.model';
 
 @Component({
@@ -25,7 +24,6 @@ export class LanguageSelectorComponent implements OnInit {
   ngOnInit(): void {
     this._dictionaryService.getLanguages().then((res) => {
       this.languages = res;
-      console.log(res);
     });
   }
 

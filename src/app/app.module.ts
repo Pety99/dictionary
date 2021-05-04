@@ -16,6 +16,7 @@ import { DictionaryService } from './services/dictionary.service';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SynonymService } from './services/synonym.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [DictionaryService],
+  providers: [DictionaryService, SynonymService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

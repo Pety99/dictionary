@@ -9,6 +9,7 @@
       [languages]="languages"
       (selectedEvent)="handleSourceLanguageSelected($event)"
       [selected]="selectedSourceLanguage"
+      [placeholderText]="'Input text'"
     ></selectLanguage>
   </div>
 
@@ -33,6 +34,7 @@
       [languages]="matchingLanguages"
       (selectedEvent)="handleTargetLanguageSelected($event)"
       [selected]="selectedTargetLanguage"
+      [placeholderText]="'Output text'"
     ></selectLanguage>
   </div>
 </div>

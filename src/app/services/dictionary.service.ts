@@ -73,8 +73,10 @@ export class DictionaryService {
    * @returns all the available languages.
    */
   async getLanguages() {
-    // Loads the languages from the API
-    await this.loadLanguages();
+    // Loads the languages from the API if they are not alrady loaded
+    if (this.languagesMap.size == 0) {
+      await this.loadLanguages();
+    }
 
     // Returns the languages in the right format
     const result: Languages = {};

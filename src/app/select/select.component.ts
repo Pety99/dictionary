@@ -18,6 +18,7 @@ export class SelectComponent implements OnInit {
   @Output() selectedEvent = new EventEmitter();
   @Input() languages = {};
   @Input() selected: string = '';
+  @Input() placeholderText: string = 'placeholder text';
 
   constructor() {}
 

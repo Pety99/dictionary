@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class OutputComponent implements OnInit {
   @Input() multiLine: boolean = false;
   @Input() chipOutput: boolean = false;
-  @Input() input: string[] = [];
+  @Input() input?: string[] = [];
   constructor() {}
 
   ngOnInit(): void {}
